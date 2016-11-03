@@ -8,24 +8,70 @@ namespace ConsoleSnake
 {
     class Grid
     {
-        public string[,] array = new string[40, 20];
 
-        public Grid(string name,int x, int y)
+        //Create private member variables and properites
+        private int _gridX;
+        private int _gridY;
+        private string _gridName;
+
+        public int gridX
         {
-            
-
-
+            get
+            {
+                return _gridX;
+            }
+            set
+            {
+                _gridX = value;
+            }
+        }
+        public int gridY
+        {
+            get
+            {
+                return _gridY;
+            }
+            set
+            {
+                _gridY = value;
+            }
+        }
+        public string gridName
+        {
+            get
+            {
+                return _gridName;
+            }
+            set
+            {
+                _gridName = value;
+            }
         }
 
+
+        //create constructor
+        public Grid(int x, int y)
+        {
+            gridX = x;
+            gridY = y;  
+        }
+
+
+        //create array for storing characters
+        public string[,] array = new string[40, 20];
+
+
+        //initialize array with character supplied
         public void InitalizeArray(string character)
         {
             string chara = character;
 
             for(int x = 0; x < 40; x++)
             {
-                array[x, 0] = chara; 
-
-
+                for (int y = 0; y < 20; y++)
+                {
+                    array[x, y] = chara;
+                }
             }
         }
     }
