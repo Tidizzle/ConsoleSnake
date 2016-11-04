@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
-    public static class Move
+    public class Move
     {
         //check for keypress -> 
         //Remove character from old add it to new ->
         //update board
 
-        private static int _StartX;
-        private static int _StartY;
-        public static int StartX
+        private int _StartX;
+        private int _StartY;
+        public int StartX
         {
             get
             {
@@ -25,7 +25,7 @@ namespace ConsoleSnake
                 _StartX = value;
             }
         }
-        public static int StartY
+        public int StartY
         {
             get
             {
@@ -37,36 +37,105 @@ namespace ConsoleSnake
             }
         }
 
-        public static void SetRndPosition()
+        public void SetRndPosition()
         {
             Random rnd = new Random();
             int StartingX = rnd.Next(0, 39);
             int StartingY = rnd.Next(0, 19);
 
-            Move.StartX = StartingX;
-            Move.StartY = StartingY;
+            this.StartX = StartingX;
+            this.StartY = StartingY;
         }
 
-        public static void SetPosition(int x, int y)
+        public void SetPosition(int x, int y)
         {
-            Move.StartX = x;
-            Move.StartY = y;
+            this.StartX = x;
+            this.StartY = y;
+            Location.X = this.StartX;
+            Location.Y = this.StartY;
         }
 
-        public static void CheckKeyPress()
+        public void GetKeyPress()
         {
-            //var test = Console.ReadKey();
-            //string test2 = test.ToString();
-            //Console.WriteLine(test2);
-
-
-            ConsoleKey test = Console.ReadKey().Key;
-
-            Console.WriteLine();
-            Console.WriteLine();
-            string test2 = test.ToString();
-            string test3 = test2.ToLower();
-            Console.WriteLine(test3);
+            ConsoleKey getKey = Console.ReadKey().Key;
+            string one = getKey.ToString();
+            string keypress = one.ToLower();
+            KeyPress = keypress;
         }
+
+        private string _keypress;
+        public string KeyPress
+        {
+            get
+            {
+                return _keypress;
+            }
+            set
+            {
+                _keypress = value;
+            }
+        }
+
+        public void ProcessKeyPress(Grid name)
+        {
+            switch (KeyPress)
+            {
+                case "a":
+                    int CurrX = Location.X;
+                    Location.ChangeX(-1);
+                    int NewX = Location.X;
+
+                    if (NewX > 40 || NewX < 0)
+                    {
+                        NewX = CurrX;
+                    }
+
+                    name.array[CurrX, Location.Y] = "-";
+                    name.array[NewX, Location.Y] = "X";
+                    break;
+                case "d":
+                    CurrX = Location.X;
+                    Location.ChangeX(1);
+                    NewX = Location.X;
+
+                    if (NewX > 40 || NewX < 0)
+                    {
+                        NewX = CurrX;
+                    }
+
+                    name.array[CurrX, Location.Y] = "-";
+                    name.array[NewX, Location.Y] = "X";
+                    break;
+                case "s":
+                    int CurrY = Location.Y;
+                    Location.ChangeY(1);
+                    int NewY = Location.Y;
+
+                    if (NewY > 20 || NewY < 0)
+                    {
+                        NewY = CurrY;
+                    }
+                    name.array[Location.X, CurrY] = "-";
+                    name.array[Location.X, NewY] = "X";
+                    break;
+                case "w":
+                    CurrY = Location.Y;
+                    Location.ChangeY(-1);
+                    NewY = Location.Y;
+
+                    if (NewY > 20 || NewY < 0)
+                    {
+                        NewY = CurrY;
+                    }
+                    name.array[Location.X, CurrY] = "-";
+                    name.array[Location.X, NewY] = "X";
+                    break;
+            }
+        }
+
+
+
+
+
     }
 }

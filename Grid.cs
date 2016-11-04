@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
-    class Grid
+    public class Grid
     {
 
         //Create private member variables and properites
@@ -61,10 +61,24 @@ namespace ConsoleSnake
         public string[,] array = new string[40, 20];
 
 
+        private string character;
+        public string Character
+        {
+            get
+            {
+                return character;
+            }
+            set
+            {
+                character = value;
+            }
+        }
+
         //initialize array with character supplied
         public void InitalizeArray(string character)
         {
             string chara = character;
+            Character = character;
 
             for(int x = 0; x < 40; x++)
             {

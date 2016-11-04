@@ -105,5 +105,11 @@ namespace ConsoleSnake
             }
         }
 
+        public static void SetChar(int StartX, int StartY, Grid name)
+        {
+            name.array[StartX, StartY] = "X";
+            Location.X = StartX;
+            Location.Y = StartY;
+        }
     }
 }
